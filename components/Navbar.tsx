@@ -1,13 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/cn";
 
 type NavTheme = "light" | "dark";
 
 export function Navbar() {
-  const [theme, setTheme] = useState<NavTheme>("light");
+  const [theme, setTheme] = useState<NavTheme>("dark");
 
   useEffect(() => {
     const update = (): void => {
@@ -43,14 +44,24 @@ export function Navbar() {
         <Link
           href="#"
           className={cn(
-            "font-fjalla text-sm tracking-tight md:text-base",
-            theme === "light"
-              ? "text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.4)]"
+            "inline-flex items-center",
+            theme === "dark"
+              ? "[&_img]:drop-shadow-[0_1px_3px_rgba(0,0,0,0.35)]"
               : "",
           )}
           aria-label="AVIVA BC — início"
         >
-          [AVIVA BC]
+          <Image
+            src="/images/avaiva.png"
+            alt=""
+            width={1000}
+            height={1000}
+            priority
+            className={cn(
+              "h-6 w-auto md:h-7",
+              theme === "light" ? "brightness-0" : "",
+            )}
+          />
         </Link>
         <a
           href="#"

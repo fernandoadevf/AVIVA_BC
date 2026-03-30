@@ -4,7 +4,11 @@ import { useLayoutEffect, useRef } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { MessageCircle } from "lucide-react";
 import { ParallaxRise } from "@/components/ParallaxRise";
+import { InvertedCursor } from "@/components/ui/inverted-cursor";
+import { usePointerFine } from "@/lib/usePointerFine";
+import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -12,6 +16,9 @@ if (typeof window !== "undefined") {
 
 export function CTASection() {
   const sectionRef = useRef<HTMLElement>(null);
+  const reduced = usePrefersReducedMotion();
+  const finePointer = usePointerFine();
+  const useInvertedCursor = !reduced && finePointer;
 
   useLayoutEffect(() => {
     const section = sectionRef.current;
@@ -50,13 +57,14 @@ export function CTASection() {
       ref={sectionRef}
       data-section="cta"
       data-nav-theme="light"
-      className="cta-section flex min-h-screen flex-col justify-center overflow-hidden bg-brand-orange px-3 py-24 md:px-8"
+      className={`cta-section relative flex min-h-screen flex-col justify-center overflow-hidden bg-brand-orange px-3 py-24 md:px-8 ${useInvertedCursor ? "cursor-none" : ""}`}
     >
+      {useInvertedCursor && <InvertedCursor containerRef={sectionRef} size={64} />}
       <ParallaxRise
         triggerRef={sectionRef}
         strength={72}
         scrub={0.8}
-        className="container-fluid mx-auto max-w-5xl"
+        className="relative z-[1] container-fluid mx-auto max-w-5xl"
       >
         <div className="cta-headline space-y-2 md:space-y-4">
           <div className="flex flex-wrap items-baseline gap-x-4 gap-y-2">
@@ -100,9 +108,23 @@ export function CTASection() {
         <Link
           id="whatsapp-btn"
           href="#"
-          className="mt-6 inline-block bg-brand-black px-10 py-5 font-fjalla text-xl uppercase tracking-wide text-brand-cream md:text-2xl"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group mt-8 flex w-full max-w-lg items-center gap-3 border-2 border-brand-black px-4 py-3 font-fjalla text-[11px] uppercase leading-snug tracking-[0.22em] text-brand-black transition-[background-color,color,box-shadow] duration-300 hover:bg-brand-black hover:text-brand-cream focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-black focus-visible:ring-offset-2 focus-visible:ring-offset-brand-orange sm:gap-4 sm:px-5 sm:py-3.5 sm:text-xs md:mt-10 md:text-[13px]"
         >
-          ENTRAR NO GRUPO DO WHATSAPP &gt;
+          <MessageCircle
+            className="h-[1.125rem] w-[1.125rem] shrink-0 stroke-[1.5] text-brand-black transition-colors duration-300 group-hover:text-brand-cream sm:h-5 sm:w-5"
+            aria-hidden
+          />
+          <span className="min-w-0 flex-1 text-balance text-left">
+            ENTRAR NO GRUPO DO WHATSAPP
+          </span>
+          <span
+            className="shrink-0 font-mono text-sm text-brand-black/45 transition-colors duration-300 group-hover:text-brand-cream sm:text-base"
+            aria-hidden
+          >
+            →
+          </span>
         </Link>
 
         <p className="mt-8 font-mono text-xs text-brand-black/90">

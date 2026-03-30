@@ -103,7 +103,7 @@ export function ManifestoSection() {
         className="container-fluid px-3 md:px-6"
       >
         <div className="row g-5 align-items-start">
-          <div className="col-lg-7">
+          <div className="col-lg-7 -mt-2 md:-mt-3">
             <div className="space-y-2 md:space-y-4">
               {leftLines.map((line, i) => (
                 <p

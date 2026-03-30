@@ -95,31 +95,28 @@ export function HeroSection() {
           BC&apos;26]
         </motion.p>
 
-        {/* 25 DE ABRIL — 1:6 x:515 y:427 */}
+        {/* 25 DE ABRIL — 1:6 x:515 y:336 */}
         <motion.p
           {...block}
           transition={{ duration: 0.45, delay: 3 * stagger }}
           className="absolute z-[5] whitespace-nowrap font-fjalla text-[clamp(1.35rem,4.5vw,4rem)] uppercase leading-none tracking-tight"
           style={{
             left: 575,
-            top: 428,
+            top: 336,
             color: FIGMA.orange,
           }}
         >
           25 DE ABRIL
         </motion.p>
 
-        <motion.div
-          {...block}
-          transition={{ duration: 0.45, delay: 3.4 * stagger }}
-          className="absolute z-[6]"
-          style={{
-            left: 575,
-            top: 507,
-          }}
-        >
-          <WhatsAppCtaButton id="whatsapp-cta" href="#" />
-        </motion.div>
+        <div className="absolute left-1/2 top-[507px] z-[6] -translate-x-1/2">
+          <motion.div
+            {...block}
+            transition={{ duration: 0.45, delay: 3.4 * stagger }}
+          >
+            <WhatsAppCtaButton id="whatsapp-cta" href="#" />
+          </motion.div>
+        </div>
 
         {/* PRAIA BARRA NORTE vertical esquerda */}
         <motion.p
