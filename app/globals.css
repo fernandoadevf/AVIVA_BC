@@ -34,8 +34,9 @@
   --radius: 0.5rem;
 }
 
+/* scroll-behavior: smooth quebra cálculos do GSAP ScrollTrigger (scrub / start-end) */
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
   overflow-x: hidden;
 }
 
