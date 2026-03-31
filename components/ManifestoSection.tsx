@@ -4,6 +4,7 @@ import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Annotation } from "@/components/Annotation";
+import { useLoadingReady } from "@/components/loading-ready-context";
 import { ParallaxRise } from "@/components/ParallaxRise";
 
 if (typeof window !== "undefined") {
@@ -27,8 +28,11 @@ export function ManifestoSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const leftRefs = useRef<(HTMLParagraphElement | null)[]>([]);
   const rightRefs = useRef<(HTMLParagraphElement | null)[]>([]);
+  const loadingReady = useLoadingReady();
 
   useLayoutEffect(() => {
+    if (!loadingReady) return;
+
     const section = sectionRef.current;
     if (!section) return;
 
@@ -76,7 +80,7 @@ export function ManifestoSection() {
     }, section);
 
     return () => ctx.revert();
-  }, []);
+  }, [loadingReady]);
 
   return (
     <section

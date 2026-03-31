@@ -4,6 +4,7 @@ import { useLayoutEffect, useRef, type ReactNode } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { cn } from "@/lib/cn";
+import { useLoadingReady } from "@/components/loading-ready-context";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -26,8 +27,11 @@ export function ParallaxRise({
   className,
 }: ParallaxRiseProps) {
   const innerRef = useRef<HTMLDivElement>(null);
+  const loadingReady = useLoadingReady();
 
   useLayoutEffect(() => {
+    if (!loadingReady) return;
+
     const inner = innerRef.current;
     const trigger = triggerRef.current;
     if (!inner || !trigger) return;
@@ -56,7 +60,7 @@ export function ParallaxRise({
       tween.scrollTrigger?.kill();
       tween.kill();
     };
-  }, [triggerRef, strength, scrub]);
+  }, [loadingReady, triggerRef, strength, scrub]);
 
   return (
     <div

@@ -5,6 +5,7 @@ import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MessageCircle } from "lucide-react";
+import { useLoadingReady } from "@/components/loading-ready-context";
 import { ParallaxRise } from "@/components/ParallaxRise";
 import { InvertedCursor } from "@/components/ui/inverted-cursor";
 import { usePointerFine } from "@/lib/usePointerFine";
@@ -26,6 +27,7 @@ export function CTASection() {
   const sectionRef = useRef<HTMLElement>(null);
   const ytPlayerRef = useRef<YTPlayerInstance | null>(null);
   const [videoMuted, setVideoMuted] = useState(true);
+  const loadingReady = useLoadingReady();
 
   const toggleVideoMute = useCallback(() => {
     const p = ytPlayerRef.current;
@@ -109,6 +111,8 @@ export function CTASection() {
   const useInvertedCursor = !reduced && finePointer;
 
   useLayoutEffect(() => {
+    if (!loadingReady) return;
+
     const section = sectionRef.current;
     if (!section) return;
 
@@ -138,7 +142,7 @@ export function CTASection() {
     }, section);
 
     return () => ctx.revert();
-  }, []);
+  }, [loadingReady]);
 
   return (
     <section

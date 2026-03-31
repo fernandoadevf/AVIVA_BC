@@ -5,11 +5,10 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const WORDS = ["Deus", "está despertando", "uma geração!"] as const;
 
-/** Theme (spec): --bg, --text, --muted, --stroke */
+/** Theme (spec): --bg, --text, --stroke */
 const loaderStyle = {
   "--bg": "#0a0a0a",
   "--text": "#f5f5f5",
-  "--muted": "#888888",
   "--stroke": "#1f1f1f",
 } as CSSProperties;
 
@@ -84,16 +83,6 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
     >
-      <motion.div
-        className="absolute left-8 top-8 text-xs uppercase tracking-[0.3em] md:left-12 md:top-12 md:text-sm"
-        style={{ color: "var(--muted)" }}
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.1 }}
-      >
-        Portfolio
-      </motion.div>
-
       <div className="absolute inset-0 flex items-center justify-center px-4">
         <AnimatePresence mode="wait">
           <motion.span

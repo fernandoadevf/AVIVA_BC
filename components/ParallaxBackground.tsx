@@ -9,6 +9,7 @@ import {
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { cn } from "@/lib/cn";
+import { useLoadingReady } from "@/components/loading-ready-context";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -34,8 +35,11 @@ export function ParallaxBackground({
   children,
 }: ParallaxBackgroundProps) {
   const ref = useRef<HTMLDivElement>(null);
+  const loadingReady = useLoadingReady();
 
   useLayoutEffect(() => {
+    if (!loadingReady) return;
+
     const el = ref.current;
     const trigger = triggerRef.current;
     if (!el || !trigger) return;
@@ -64,7 +68,7 @@ export function ParallaxBackground({
       tween.scrollTrigger?.kill();
       tween.kill();
     };
-  }, [triggerRef, strength, scrub]);
+  }, [loadingReady, triggerRef, strength, scrub]);
 
   return (
     <div ref={ref} className={cn("will-change-transform", className)}>

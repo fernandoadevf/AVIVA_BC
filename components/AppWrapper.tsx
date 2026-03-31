@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { LoadingReadyProvider } from "@/components/loading-ready-context";
 import { LoadingScreen } from "@/components/LoadingScreen";
 
 if (typeof window !== "undefined") {
@@ -51,9 +52,20 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
     void document.fonts.ready.then(run);
     timers.push(setTimeout(run, 600));
 
+    let resizeDebounce: ReturnType<typeof setTimeout>;
+    const ro = new ResizeObserver(() => {
+      clearTimeout(resizeDebounce);
+      resizeDebounce = setTimeout(() => {
+        if (!cancelled) refreshScrollTriggers();
+      }, 80);
+    });
+    ro.observe(document.documentElement);
+
     return () => {
       cancelled = true;
+      clearTimeout(resizeDebounce);
       timers.forEach(clearTimeout);
+      ro.disconnect();
     };
   }, [isLoading]);
 
@@ -67,15 +79,17 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
           />
         )}
       </AnimatePresence>
-      <div
-        aria-hidden={isLoading}
-        style={{
-          opacity: isLoading ? 0 : 1,
-          transition: "opacity 0.5s ease-out",
-        }}
-      >
-        {children}
-      </div>
+      <LoadingReadyProvider value={!isLoading}>
+        <div
+          aria-hidden={isLoading}
+          style={{
+            opacity: isLoading ? 0 : 1,
+            transition: "opacity 0.5s ease-out",
+          }}
+        >
+          {children}
+        </div>
+      </LoadingReadyProvider>
     </>
   );
 }
