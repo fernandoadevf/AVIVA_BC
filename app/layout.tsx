@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Fjalla_One, Space_Mono } from "next/font/google";
+import { Fjalla_One, Instrument_Serif, Space_Mono } from "next/font/google";
+import { AppWrapper } from "@/components/AppWrapper";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./globals.css";
 
@@ -17,6 +18,13 @@ const spaceMono = Space_Mono({
   display: "swap",
 });
 
+const instrumentSerif = Instrument_Serif({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-instrument-serif",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "AVIVA BC — Movimento de adoração ao alvorecer",
   description:
@@ -31,9 +39,11 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${fjallaOne.variable} ${spaceMono.variable}`}
+      className={`${fjallaOne.variable} ${spaceMono.variable} ${instrumentSerif.variable}`}
     >
-      <body className="grain min-h-screen">{children}</body>
+      <body className="grain min-h-screen">
+        <AppWrapper>{children}</AppWrapper>
+      </body>
     </html>
   );
 }

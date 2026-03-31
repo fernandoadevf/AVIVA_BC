@@ -7,6 +7,24 @@ import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 
 const stagger = 0.08;
 
+const HERO_VIDEO_ID = "BaU09uT6LJM";
+
+function heroEmbedSrc(): string {
+  const p = new URLSearchParams({
+    autoplay: "1",
+    mute: "1",
+    loop: "1",
+    playlist: HERO_VIDEO_ID,
+    controls: "0",
+    modestbranding: "1",
+    playsinline: "1",
+    rel: "0",
+    showinfo: "0",
+    iv_load_policy: "3",
+  });
+  return `https://www.youtube.com/embed/${HERO_VIDEO_ID}?${p.toString()}`;
+}
+
 /** Wireframe Figma 1440×1024 — cores em 0–1 → CSS */
 const FIGMA = {
   bg: "#252525", // rgb(0.146, 0.146, 0.146)
@@ -41,8 +59,29 @@ export function HeroSection() {
         style={{ backgroundColor: FIGMA.bg }}
         aria-hidden
       />
+
+      {!reduced && (
+        <div
+          className="pointer-events-none absolute inset-0 z-[1] overflow-hidden"
+          aria-hidden
+        >
+          <iframe
+            className="absolute left-1/2 top-1/2 h-[56.25vw] min-h-full w-[100vw] min-w-[177.77vh] -translate-x-1/2 -translate-y-1/2 border-0"
+            src={heroEmbedSrc()}
+            title="Vídeo de fundo — AVIVA BC"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen={false}
+            referrerPolicy="strict-origin-when-cross-origin"
+          />
+          <div
+            className="absolute inset-0 bg-gradient-to-b from-[#252525]/75 via-[#252525]/55 to-[#252525]/80"
+            aria-hidden
+          />
+        </div>
+      )}
+
       <div
-        className="pointer-events-none absolute inset-0 z-[1] bg-[url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27300%27 height=%27300%27%3E%3Cfilter id=%27n%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.85%27 numOctaves=%274%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23n)%27/%3E%3C/svg%3E')] opacity-[0.04]"
+        className="pointer-events-none absolute inset-0 z-[2] bg-[url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27300%27 height=%27300%27%3E%3Cfilter id=%27n%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.85%27 numOctaves=%274%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23n)%27/%3E%3C/svg%3E')] opacity-[0.04]"
         aria-hidden
       />
 

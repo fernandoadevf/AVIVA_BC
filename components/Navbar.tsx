@@ -58,7 +58,7 @@ export function Navbar() {
             height={1000}
             priority
             className={cn(
-              "h-6 w-auto md:h-7",
+              "h-9 w-auto md:h-11",
               theme === "light" ? "brightness-0" : "",
             )}
           />

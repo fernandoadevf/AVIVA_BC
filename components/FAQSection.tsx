@@ -4,6 +4,7 @@ import { useId, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ParallaxRise } from "@/components/ParallaxRise";
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
+import { LocationMap } from "@/components/ui/location-map";
 
 const faqs = [
   {
@@ -110,6 +111,13 @@ export function FAQSection() {
               </div>
             );
           })}
+        </div>
+
+        <div className="mt-16 hidden md:flex flex-col items-center">
+          <p className="mb-3 font-mono text-[9px] uppercase tracking-[0.2em] text-brand-orange/50">
+            {"// LOCAL"}
+          </p>
+          <LocationMap className="w-[360px]" />
         </div>
       </ParallaxRise>
     </section>

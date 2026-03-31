@@ -10,6 +10,7 @@ const config: Config = {
       fontFamily: {
         fjalla: ["var(--font-fjalla-one)", "sans-serif"],
         mono: ["var(--font-space-mono)", "monospace"],
+        display: ["var(--font-instrument-serif)", "Georgia", "serif"],
       },
       borderRadius: {
         lg: "var(--radius)",

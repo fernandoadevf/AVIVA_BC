@@ -11,19 +11,16 @@ if (typeof window !== "undefined") {
 }
 
 const leftLines = [
-  "O AVIVA BC",
-  "NÃO É UM     CULTO_",
-  "— É UM",
-  "MOVIMENTO.",
+  "O MOVIMENTO AVIVA",
+  "NÃO É SÓ MAIS UM     MOVIMENTO_",
+  "— NÓS ESTAMOS",
+  "VIVENDO O AVIVAMENTO.",
 ] as const;
 
 const rightCopy = [
-  "Uma convocação para uma geração que decidiu não se misturar.",
-  "[A REVOLUÇÃO JÁ COMEÇOU.]",
-  "Nas praias. Nas escolas. Nas ruas.",
-  "500 pessoas se levantaram às 5H da manhã. O próximo é maior.",
-  "Homens e mulheres que sabem a quem pertencem.",
-  "Fé não é fuga — é posicionamento.",
+  "É um chamado para quem tem fome de Deus, para quem deseja mais da Sua presença e não se contenta com o superficial. Nos reunimos ao amanhecer para louvar e adorar a Ele.",
+  "Não são apenas encontros, são experiências reais, onde uma geração está sendo despertada.",
+  "O Aviva é sobre isso: fazer parte do que Deus está fazendo na terra.",
 ] as const;
 
 export function ManifestoSection() {
@@ -111,9 +108,9 @@ export function ManifestoSection() {
                   ref={(el) => {
                     leftRefs.current[i] = el;
                   }}
-                  className="font-fjalla text-[clamp(2.5rem,8vw,7rem)] leading-[0.95] text-brand-black"
+                  className="font-fjalla text-[clamp(1.45rem,4.2vw,4.25rem)] leading-[0.98] text-brand-black"
                   style={{
-                    paddingLeft: i === 1 ? "0.15em" : i === 3 ? "2rem" : 0,
+                    paddingLeft: i === 1 ? "0.15em" : i === 3 ? "1.25rem" : 0,
                     transform: i === 2 ? "translateX(8%)" : undefined,
                   }}
                 >
@@ -122,15 +119,15 @@ export function ManifestoSection() {
               ))}
             </div>
           </div>
-          <div className="col-lg-5">
-            <div className="space-y-6 pt-4 md:pt-12">
+          <div className="col-lg-5 mt-2 md:mt-4">
+            <div className="-translate-x-1 space-y-6 pt-3 md:-translate-x-1.5 md:pt-9">
               {rightCopy.map((text, i) => (
                 <p
                   key={text}
                   ref={(el) => {
                     rightRefs.current[i] = el;
                   }}
-                  className="font-mono text-sm leading-relaxed text-brand-black/90 md:text-[14px]"
+                  className="font-mono text-[15px] leading-[1.75] text-brand-black/90 md:text-[17px] md:leading-[1.7]"
                   style={{ textAlign: "justify" }}
                 >
                   {text}
